@@ -26,9 +26,11 @@ app.get('/', (req, res) => {
 app.get('/get/the/token', (req, res) => {
 
     const Token_Endpoint = `http://localhost:8080/v1/oauth/tokens`;
-    const Grant_Type = 'password';
-    const UserName = process.env.USERNAME;
-    const Password = process.env.PASSWORD;
+    const Grant_Type = '<grant_type>';
+    const UserName = '<username>';
+    const Password = '<password>';
+    const CLIENT_ID= '<client_id>';
+    const CLIENT_SECRET= '<client_secret>';
     const Scope = 'read';
 
     let body = `grant_type=${Grant_Type}&username=${UserName}&password=${Password}&scope=${encodeURIComponent(Scope)}`;
@@ -42,7 +44,7 @@ app.get('/get/the/token', (req, res) => {
         body: body,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + new Buffer(querystring.escape(process.env.CLIENT_ID) + ':' + querystring.escape(process.env.CLIENT_SECRET)).toString('base64')
+            'Authorization': 'Basic ' + new Buffer(querystring.escape(CLIENT_ID) + ':' + querystring.escape(CLIENT_SECRET)).toString('base64')
         }
     }).then(async response => {
 
